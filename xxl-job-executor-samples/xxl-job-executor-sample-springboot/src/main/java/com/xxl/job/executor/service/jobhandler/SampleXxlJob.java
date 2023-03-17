@@ -36,6 +36,8 @@ public class SampleXxlJob {
      */
     @XxlJob("demoJobHandler")
     public void demoJobHandler() throws Exception {
+        logger.info("xxl-job execute!!");
+
         XxlJobHelper.log("XXL-JOB, Hello World.");
 
         for (int i = 0; i < 5; i++) {

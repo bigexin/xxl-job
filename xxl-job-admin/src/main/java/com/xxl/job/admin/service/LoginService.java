@@ -65,6 +65,11 @@ public class LoginService {
         return ReturnT.SUCCESS;
     }
 
+    public void loginWithUserName(HttpServletResponse response, XxlJobUser xxlJobUser) {
+        String loginToken = makeToken(xxlJobUser);
+        CookieUtil.set(response, LOGIN_IDENTITY_KEY, loginToken, false);
+    }
+
     /**
      * logout
      *
