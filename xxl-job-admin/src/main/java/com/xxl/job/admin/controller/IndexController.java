@@ -26,9 +26,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * index controller
@@ -50,6 +48,8 @@ public class IndexController {
 
     @Resource
     private XxlJobUserDao xxlJobUserDao;
+
+    private static final List<String> userIdWhiteList = Arrays.asList("zbing");
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -136,7 +136,7 @@ public class IndexController {
     }
 
     private void checkUserTeam(UserInfo ceibsUserInfo) {
-        if (!"is".equalsIgnoreCase(ceibsUserInfo.getClassOrTeam())) {
+        if (!userIdWhiteList.contains(ceibsUserInfo.getId()) && !"is".equalsIgnoreCase(ceibsUserInfo.getClassOrTeam())) {
             throw new RuntimeException("暂无权限登录此系统");
         }
     }
